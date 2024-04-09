@@ -19,26 +19,31 @@ from math import pi
 class Sphere:
     def __init__(self, pRayon) -> None:
         self._rayon = pRayon
-    
-    @property
-    def rayon(self) :
-        pass
 
     @property
+    def rayon(self) :
+        return self._rayon
+    @property
     def circonference(self):
-        pass # la circonférence d'une sphère est égal à " 2 * pi * rayon "
+        circonférence = 2*pi*self.rayon
+        return circonférence
 
     @property
     def volume(self):
-        pass # le volume d'une sphère est égale à " 4/3 * pi * (rayon ** 3) "
-
+        volume = 4/3 * pi * (self.rayon ** 3)
+        return volume
+    @rayon.setter
+    def rayon(self, pRayon):
+        if type(pRayon) != int and float:
+            raise TypeError(f"doit être un int ou float")
+        elif self.rayon <= 0:
+            raise ValueError(f"Doit être au dessus de zero")
     @property
     def aire(self):
         pass
 
 
 if __name__ == "__main__" :
-    print(pi) #voyez que vous pouvez utilisé la constante pi
-
-    #Testez votre code, voir l'énoncé
-
+    cercle = Sphere(-20)    
+    cercle.circonference
+    cercle.volume

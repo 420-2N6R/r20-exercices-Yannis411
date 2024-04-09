@@ -6,18 +6,43 @@
 
 class Terrain:
     def __init__(self,nom,couleur,est_a_vendre,prix) -> None:
-        self.nom = nom
-        self.couleur = couleur
-        self.prix = prix
-        
+        self._nom = nom
+        self._couleur = couleur
+        self._prix = prix
+    @property
+    def nom(self):
+        print(f"impossible de changer ces attributs ")
+        return self._nom
+    @property
+    def couleur(self):
+        print(f"impossible de changer ces attributs ")
+        return self._couleur
+    @property
+    def prix(self):
+        return self._prix
+    @prix.setter
+    def prix(self, nouveau_prix):
+        if self._prix >= nouveau_prix:
+            raise ValueError(print(f"La nouvelle valeur doit être supérieure à l'ancienne"))
+
     def __str__(self) -> str:
         return self.nom
 
 class Banque:
-    def __init__(self,montant_cash,list_terrains) -> None:
-        self.montant_cash = montant_cash
+    def __init__(self,montant_cash,list_terrains, montant_parc_immobilier) -> None:
+        self._montant_cash = montant_cash
         self.list_terrains = list_terrains
-
+        self._montant_parc_immobilier = montant_parc_immobilier
+    @property
+    def montant_cash(self):
+        return self._montant_cash
+    @montant_cash.setter
+    def montant_cash(self):
+        try:
+            if type(self._montant_cash) == float:
+                print(f"Montant a été changer")
+        except TypeError:
+            print(f"Vous devez entrer un float")
 class Joueur:
     def __init__(self,montant_cash,list_terrains) -> None:
         self.montant_cash = montant_cash
