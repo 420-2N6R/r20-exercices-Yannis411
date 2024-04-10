@@ -29,10 +29,10 @@ class Terrain:
         return self.nom
 
 class Banque:
-    def __init__(self,montant_cash,list_terrains, montant_parc_immobilier) -> None:
+    def __init__(self,montant_cash,list_terrains) -> None:
         self._montant_cash = montant_cash
         self.list_terrains = list_terrains
-        self._montant_parc_immobilier = montant_parc_immobilier
+
     @property
     def montant_cash(self):
         return self._montant_cash
@@ -43,17 +43,29 @@ class Banque:
                 print(f"Montant a été changer")
         except TypeError:
             print(f"Vous devez entrer un float")
+    @staticmethod
+    def montant_parc_immobilier(self):
+        for montant in self.list_terrains:
+            montant = self.list_terrains['_prix']
 class Joueur:
     def __init__(self,montant_cash,list_terrains) -> None:
-        self.montant_cash = montant_cash
+        self._montant_cash = montant_cash
         self.list_terrains = list_terrains
+    
+    @property
+    def montant_cash(self):
+        return self._montant_cash
+    @montant_cash.setter
+    def montant_cash(self):
+        if type(self._montant_cash) != float:
+            raise TypeError(print(f"Veuiller entrer un float"))
 
     def acheter(self,proprietaire,terrain:Terrain): 
         if self.montant_cash >= terrain.prix:
             if (terrain in proprietaire.list_terrains):
                 proprietaire.list_terrains.remove(terrain)
                 self.list_terrains.append(terrain)
-                proprietaire.montant_cash += terrain.prix
+                proprietaire._montant_cash += terrain.prix
                 self.montant_cash -= terrain.prix
             else:
                 print("Désolé, je n'ai pas ce terrain à vendre")

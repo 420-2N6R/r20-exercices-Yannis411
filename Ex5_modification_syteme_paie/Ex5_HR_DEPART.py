@@ -30,26 +30,81 @@ class Employe(ABC):
 class Employe_salarie(Employe):
     def __init__(self, id, nom, salaire_par_semaine):
         super().__init__(id, nom)
-        self.salaire_par_semaine = salaire_par_semaine
+        self._salaire_par_semaine = salaire_par_semaine
         
     def calculer_paie(self):
-        return self.salaire_par_semaine
- 
+        return self._salaire_par_semaine
+    @property
+    def salaire_par_semaine(self):
+        return self._salaire_par_semaine
+    @salaire_par_semaine.setter
+    def salaire_par_semaine(self):
+        try:
+            if type(self._salaire_par_semaine) == float:
+                print(f"Le salaire a changé")
+        except TypeError:
+            print(f"Vous devez entrer une valeur float")
 class Employe_heure(Employe):  
     def __init__(self, id, nom, heures_travaillees, taux_horaire):
         super().__init__(id, nom)
-        self.heures_travaillees = heures_travaillees
-        self.taux_horaire = taux_horaire
-        
+        self._heures_travaillees = heures_travaillees
+        self._taux_horaire = taux_horaire
+
+    @property
+    def heures_travaillee(self):
+        return self._heures_travaillees
+    @heures_travaillee.setter
+    def heures_travaillees(self):
+        try:
+            if type(self._heures_travaillees) == float:
+                print(f"Les heures ont changés")
+        except TypeError:
+            print(f"Vous devez entrer une valeur float")
+
+
+    @property
+    def taux_horaire(self):
+        return self._taux_horaire    
+    @taux_horaire.setter
+    def taux_horaie(self):
+        try:
+            if type(self._taux_horaire) == float:
+                print(f"Le taux horaire ont changés")
+        except TypeError:
+            print(f"Vous devez entrer une valeur float")
+
+
     def calculer_paie(self):
         return self.heures_travaillees * self.taux_horaire
     
 class Employe_commission(Employe_salarie):  
-    def __init__(self, id, nom, salaire_par_semaine, commission):
-        super().__init__(id, nom, salaire_par_semaine)
-        self.commission = commission
+    def __init__(self, id, nom, _salaire_par_semaine, commission):
+        super().__init__(id, nom, _salaire_par_semaine)
+        self._commission = commission
 
-        
+    @property
+    def commission(self):
+        return self._commission
+    @commission.setter
+    def commission(self):
+        try:
+            if type(self._commission) == float:
+                print(f"La commission a changés")
+        except TypeError:
+            print(f"Vous devez entrer une valeur float")
+    
+    
+    @property
+    def salaire_par_semaine(self):
+        return self._salaire_par_semaine    
+    @salaire_par_semaine.setter
+    def salaire_par_semaine(self):
+        try:
+            if type(self._salaire_par_semaine) == float:
+                print(f"Le taux horaire ont changés")
+        except TypeError:
+            print(f"Vous devez entrer une valeur float")  
+
     def calculer_paie(self):
         salaire_fixe = super().calculer_paie()
         return salaire_fixe + self.commission
